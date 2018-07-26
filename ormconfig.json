@@ -4,7 +4,7 @@
   "port": 3306,
   "username": "root",
   "password": "qwer1234",
-  "database": "net-app",
+  "database": "net_app",
   "entities": ["src/**/**.entity{.ts,.js}"],
   "synchronize": true
 }
