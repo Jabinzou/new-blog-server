@@ -1,33 +1,21 @@
-import { Category } from './category.entity';
-import { Tag } from './tag.entity';
+import { Article } from './article.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
   ManyToMany,
-  JoinTable,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity()
-export class Article {
+export class Tag {
   @PrimaryGeneratedColumn() id: number;
 
   @Column()
-  title: string;
+  name: string;
 
-  @Column()
-  desc: string;
-
-  @Column({type: 'longtext'}) // 文本类型
-  content: string;
-
-  @ManyToOne(type => Category, category => category.articles)
-  category: Category[];
-
-  @ManyToMany(type => Tag, tag => tag.articles)
-  @JoinTable()
-  tag: Tag[];
+  @ManyToMany(type => Article, article => article.tag)
+  articles: Article[];
 
   @Column({
     name: 'createAt',

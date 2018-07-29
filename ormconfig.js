@@ -7,6 +7,6 @@ module.exports = { // you can chose your real mysql database info
   password: "qwer1234",  
   database: "net_app",
   entities: ["src/**/**.entity{.ts,.js}"],
-  synchronize: true,
+  synchronize: process.env.NODE_ENV === 'development' && false, // 正是环境 可能会丢失数据，同步数据库model,需要去掉
   logging: process.env.NODE_ENV === 'development'
 }
