@@ -1,5 +1,6 @@
 import { Category } from './category.entity';
 import { Tag } from './tag.entity';
+import { User } from './user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -21,6 +22,9 @@ export class Article {
 
   @Column({type: 'longtext'}) // 文本类型
   content: string;
+
+  @ManyToOne(type => User, user => user.article)
+  user: User;
 
   @ManyToOne(type => Category, category => category.articles)
   category: Category[];

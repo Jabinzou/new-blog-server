@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'typeorm';
 import { Article } from './article.entity';
+import { User } from './user.entity';
 
 @Entity()
 export class Category {
@@ -10,6 +11,9 @@ export class Category {
 
   @OneToMany(type => Article, article => article.category)
   articles: Article[];
+
+  @ManyToOne(type => User, user => user.category)
+  user: User;
 
   @Column({
     name: 'createdAt',

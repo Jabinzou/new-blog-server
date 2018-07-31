@@ -1,4 +1,5 @@
 import { Article } from './article.entity';
+import { User } from './user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -16,6 +17,9 @@ export class Tag {
 
   @ManyToMany(type => Article, article => article.tag)
   articles: Article[];
+
+  @ManyToOne(type => User, user => user.category)
+  user: User;
 
   @Column({
     name: 'createAt',
