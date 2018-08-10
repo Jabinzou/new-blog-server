@@ -26,6 +26,9 @@ export class Article {
   @ManyToOne(type => User, user => user.article)
   user: User;
 
+  @Column()
+  views: number;
+
   @ManyToOne(type => Category, category => category.articles)
   category: Category[];
 
