@@ -17,7 +17,7 @@ import {
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService){}
   @Get('list')
-  async getAllCate(@Query() options, @Response() res): Promise<any> {
+  async getAllCate(@Query() options): Promise<any> {
     try {
       return await this.categoryService.findAll(options);
     } catch (error) {
