@@ -12,7 +12,7 @@ export class CategoryService {
   constructor(
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
-    // private readonly userService: UserService,
+    private readonly userService: UserService,
   ) {}
   /**
    * @desc get all category of article

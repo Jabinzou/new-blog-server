@@ -19,5 +19,4 @@ export class UserService {
   async findId(id: number): Promise<any> {
     return await this.userRepository.findOneOrFail(id);
   }
-
 }
