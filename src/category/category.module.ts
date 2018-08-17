@@ -7,9 +7,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Category, User])],
+  imports: [TypeOrmModule.forFeature([Category, User])], // you can use provider import other service into related module
   controllers: [CategoryController],
-  providers: [CategoryService, UserService],
+  providers: [CategoryService, UserService], // provide service module
   exports: [CategoryService],
 })
 export class CategoryModule {

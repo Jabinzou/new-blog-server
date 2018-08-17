@@ -39,5 +39,17 @@ export class CategoryService {
   async addCate(options): Promise<any> {
     const user = await this.userService.findId(options.userId);
     const cate = this.categoryRepository.create();
+    Object.keys(options).forEach(item => {
+      if (item !== 'userId') {
+        cate[item] = options[item];
+      }
+    });
+    // exactly you can create(options) that will create the injected instance
+    /**
+     * @example
+     *  const user = await this.userService.findId(options);
+     */
+    cate.user = user;
+    return await this.categoryRepository.save(cate);
   }
 }
