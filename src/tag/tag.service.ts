@@ -36,4 +36,11 @@ export class TagService {
     tag.name = options.name;
     return await this.tagRepository.save(tag);
   }
+  /**
+   * @desc get ids query result
+   * @param options
+   */
+  async findIds(options: number[]): Promise<any> {
+    return await this.tagRepository.findByIds(options);
+  }
 }

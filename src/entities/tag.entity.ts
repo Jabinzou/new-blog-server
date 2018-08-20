@@ -6,6 +6,7 @@ import {
   Column,
   ManyToMany,
   ManyToOne,
+  JoinTable,
 } from 'typeorm';
 
 @Entity()

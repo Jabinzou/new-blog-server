@@ -52,4 +52,16 @@ export class CategoryService {
     cate.user = user;
     return await this.categoryRepository.save(cate);
   }
+  /**
+   * @desc select cate by id
+   * @param id
+   */
+  async find(id: number): Promise<any> {
+    return await this.categoryRepository.findOneOrFail({
+      where: {
+        id,
+      },
+      relations: ['user'],
+    });
+  }
 }
