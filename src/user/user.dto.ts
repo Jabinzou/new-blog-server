@@ -9,8 +9,6 @@ import {
  * @desc validate params used class
  */
 export class UserDto {
-  @IsNumber()
-  readonly id: number;
 
   @IsString()
   @IsNotEmpty()
@@ -18,6 +16,6 @@ export class UserDto {
   readonly userName: string;
 
   @IsString()
-  @Max(50)
-  readonly desc: string;
+  @IsNotEmpty()
+  readonly passWord: string;
 }
