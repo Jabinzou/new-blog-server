@@ -7,9 +7,11 @@ export class Signverify implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const req = context.switchToHttp().getRequest();
     const sign = md5(
-      JSON.stringify({timestamp: req.headers.Time_stamp, data: req.body}),
+      JSON.stringify({
+        timeStamp: +req.headers.time_stamp,
+        data: {} + 'kissmyass'}),
     );
-    if (req.headers.Auth_sign !== sign) {
+    if (req.headers.auth_sign !== sign) {
       throw new HttpException('you have wrong sign!', HttpStatus.FORBIDDEN);
     }
     return true;
