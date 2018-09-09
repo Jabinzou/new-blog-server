@@ -15,7 +15,7 @@ export class RequestIntercenptor<T> implements NestInterceptor<T, Response<T>> {
     call$: Observable<T>,
   ): Observable<Response<T>>{
     return call$.pipe(map(data => ({
-      code: 200,
+      code: 1000,
       message: 'success',
       data,
     })));

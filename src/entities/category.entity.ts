@@ -12,7 +12,7 @@ export class Category {
   @OneToMany(type => Article, article => article.category)
   articles: Article[];
 
-  @ManyToOne(type => User, user => user.category)
+  @ManyToOne(type => User, user => user.category, {cascade: true, onDelete: 'CASCADE', primary: true})
   user: User;
 
   @Column({

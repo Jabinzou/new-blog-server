@@ -23,13 +23,13 @@ export class Article {
   @Column({type: 'longtext'}) // 文本类型
   content: string;
 
-  @ManyToOne(type => User, user => user.article)
+  @ManyToOne(type => User, user => user.article, {cascade: true, onDelete: 'CASCADE', primary: true})
   user: User;
 
   @Column()
   views: number;
 
-  @ManyToOne(type => Category, category => category.articles)
+  @ManyToOne(type => Category, category => category.articles, { cascade: true, onDelete: 'CASCADE', primary: true})
   category: Category[];
 
   @ManyToMany(type => Tag, tag => tag.articles)
