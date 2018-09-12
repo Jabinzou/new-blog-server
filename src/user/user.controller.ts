@@ -17,6 +17,7 @@ Response,
 Body,
 } from '@nestjs/common';
 import { UserDto } from './user.dto';
+import { decryptString } from '../utils/stringUtil';
 @Controller('api/user')
 export class UserController {
   constructor(
@@ -32,7 +33,11 @@ export class UserController {
   @Post('verify')
   async confirm(@Body() options: UserDto): Promise<any> {
     try {
-      return await this.userService.verify(options);
+      const params = {
+        userName: decryptString(options.userName, options.key, options.iv),
+        passWord: decryptString(options.passWord, options.key, options.iv),
+      };
+      return await this.userService.verify(params);
     } catch (error) {
       throw new HttpException({error}, HttpStatus.UNAUTHORIZED);
     }

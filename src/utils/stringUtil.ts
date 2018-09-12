@@ -1,4 +1,4 @@
-import CryptoJS from 'crypto-js/crypto-js';
+import * as CryptoJS from 'crypto-js/crypto-js';
 /**
  * usual string md5
  * @param content encode str

@@ -18,4 +18,6 @@ export class UserDto {
   @IsString()
   @IsNotEmpty()
   readonly passWord: string;
+  readonly key?: string;
+  readonly iv?: string;
 }
