@@ -11,11 +11,11 @@ export class TagController {
    * @param options
    */
   @Get('list')
-  async all(@Query() options): Promise<any> {
+  async getAll(@Query() options): Promise<any> {
     try {
       return await this.tagService.findTag(options);
     } catch (error) {
-      throw new HttpException({ error }, HttpStatus.BAD_REQUEST);
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
   /**

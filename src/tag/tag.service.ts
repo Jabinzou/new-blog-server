@@ -16,9 +16,10 @@ export class TagService {
    * @desc get filter tag
    * @param options check options any
    */
-  async findTag(options): Promise<any> {
+  async findTag(options: object): Promise<any> {
     const [list = [], count = 0] = await this.tagRepository.findAndCount({
-      relations: ['user', 'articles'],
+      select: ['id', 'name', 'createAt'],
+      // relations: ['user', 'articles'],
       where: {
         ...options,
       },
