@@ -1,6 +1,6 @@
 import { Category } from '../entities/category.entity';
 import { User } from '../entities/user.entity';
-import { createQueryBuilder, getRepository, Repository } from 'typeorm';
+import { createQueryBuilder, getRepository, Repository, ObjectID } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserService } from '../user/user.service';
@@ -39,18 +39,20 @@ export class CategoryService {
   async addCate(options): Promise<any> {
     const user = await this.userService.findId(options.userId);
     const cate = this.categoryRepository.create();
-    Object.keys(options).forEach(item => {
-      if (item !== 'userId') {
-        cate[item] = options[item];
-      }
-    });
     // exactly you can create(options) that will create the injected instance
     /**
      * @example
      *  const user = await this.userService.findId(options);
      */
     cate.user = user;
+    cate.name = options.name;
     return await this.categoryRepository.save(cate);
+  }
+  /**
+   * @description 删除分类
+   */
+  async deleteCate(options: ObjectID[]): Promise<any> {
+    return await this.categoryRepository.delete(options);
   }
   /**
    * @desc select cate by id

@@ -45,9 +45,14 @@ export class UserController {
         expiresIn: '24h',
       });
       /**
-       * @description 这里需要解析cookie设置，上线需要替换domain
+       * @description 这里需要解析cookie设置，上线需要替换domain,多个cookie用逗号隔开
        */
-      res.set('Set-Cookie', `token=${token};Domain=localhost;Path=/;Max-Age=${24 * 60 * 60}`);
+      res.set('Set-Cookie',
+        [
+          `token=${token};Domain=localhost;Path=/;Max-Age=${24 * 60 * 60}`,
+          `tag=${backup.id};Domain=localhost;Path=/;Max-Age=${24 * 60 * 60}`,
+        ],
+      );
       res.send(token);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.UNAUTHORIZED);

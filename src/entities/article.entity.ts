@@ -26,7 +26,9 @@ export class Article {
   @ManyToOne(type => User, user => user.article, {cascade: true, onDelete: 'CASCADE', primary: true})
   user: User;
 
-  @Column()
+  @Column({
+    default: () => 0,
+  })
   views: number;
 
   @ManyToOne(type => Category, category => category.articles, { cascade: true, onDelete: 'CASCADE', primary: true})

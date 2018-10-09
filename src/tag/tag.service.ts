@@ -44,4 +44,10 @@ export class TagService {
   async findIds(options: number[]): Promise<any> {
     return await this.tagRepository.findByIds(options);
   }
+  /**
+   * @desc delete by ids
+   */
+  async deleteTag(options: number[]): Promise<any> {
+    return await this.tagRepository.delete(options);
+  }
 }

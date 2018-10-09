@@ -24,9 +24,23 @@ export class TagController {
   @Post('add')
   async add(@Body() options: CreateTagDto): Promise<any>{
     try {
-      return await this.tagService.add(options);
+      await this.tagService.add(options);
+      return 'success';
     } catch (error) {
-      throw new HttpException({ error }, HttpStatus.BAD_REQUEST);
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
+  }
+  /**
+   * @desc delete tag
+   * @param options Array
+   */
+  @Post('delete')
+  async deleteTag(@Body() options): Promise<any> {
+    try {
+      await this.tagService.deleteTag(options);
+      return null;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
  }

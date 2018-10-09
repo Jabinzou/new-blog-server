@@ -24,4 +24,28 @@ export class CategoryController {
       throw new HttpException({error}, HttpStatus.BAD_REQUEST);
     }
   }
+  /**
+   * @desc 添加分类
+   */
+  @Post('add')
+  async addCate(@Body() options): Promise<any> {
+    try {
+      await this.categoryService.addCate(options);
+      return null;
+    } catch (error) {
+      throw new HttpException({error}, HttpStatus.BAD_REQUEST);
+    }
+  }
+  /**
+   * @desc 删除分类
+   */
+  @Post('delete')
+  async deleteCate(@Body() options): Promise<any> {
+    try {
+      await this.categoryService.deleteCate(options);
+      return null;
+    } catch (error) {
+      throw new HttpException({error}, HttpStatus.BAD_REQUEST);
+    }
+  }
 }

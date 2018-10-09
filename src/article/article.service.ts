@@ -61,13 +61,17 @@ export class ArticleService {
       stripIgnoreTagBody: ['script'], // 过滤script标签
     };
     article.content = xss(options.content, option);
-    Object.keys(options).forEach(key => {
-      if (key !== ('userId' || 'categoryId' || 'content')) article[key] = options[key];
-    });
+    article.title = options.title;
+    article.desc = options.desc;
     article.user = user;
     article.category = cate;
     article.tag = tag;
-    return await this.articleRepository.save(article);
+    try {
+      await this.articleRepository.save(article);
+    } catch (err) {
+      console.log(err);
+      throw new Error(err);
+    }
   }
   /**
    * @desc increment views
