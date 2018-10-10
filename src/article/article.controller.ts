@@ -18,7 +18,7 @@ export class ArticleController {
     try {
       return await this.articleService.find(options);
     } catch (error) {
-      throw new HttpException({ error }, HttpStatus.BAD_REQUEST);
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
   /**
@@ -30,9 +30,23 @@ export class ArticleController {
     try {
       return await this.articleService.add(options);
     } catch (error) {
-      throw new HttpException({ error }, HttpStatus.BAD_REQUEST);
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
+  /**
+   * @description 获取文章详情
+   * @param options
+   */
+  @Get('detail')
+  async getDetail(@Query() options): Promise<any> {
+    try {
+      await this.articleService.increment(options);
+      return this.articleService.getDetail(options);
+    } catch (err) {
+      throw new HttpException(err.message, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   @Post('up')
   async increment(@Body() options: number): Promise<any> {
     try {

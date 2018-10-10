@@ -32,7 +32,7 @@ export class Article {
   views: number;
 
   @ManyToOne(type => Category, category => category.articles, { cascade: true, onDelete: 'CASCADE', primary: true})
-  category: Category[];
+  category: Category;
 
   @ManyToMany(type => Tag, tag => tag.articles)
   @JoinTable()

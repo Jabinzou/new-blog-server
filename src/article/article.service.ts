@@ -35,7 +35,13 @@ export class ArticleService {
     }
     const [list = [], count = 0] = await getRepository(Article)
       .createQueryBuilder('article')
-      .leftJoinAndSelect('article.user', 'user')
+      .select([
+        'article.id',
+        'article.desc',
+        'article.createAt',
+        'article.title',
+        'article.views',
+      ])
       .leftJoinAndSelect('article.category', 'category')
       .leftJoinAndSelect('article.tag', 'tag')
       .where(term, param)
@@ -69,7 +75,6 @@ export class ArticleService {
     try {
       await this.articleRepository.save(article);
     } catch (err) {
-      console.log(err);
       throw new Error(err);
     }
   }
@@ -79,5 +84,15 @@ export class ArticleService {
    */
   async increment(id: number): Promise<any> {
     return this.articleRepository.increment({id}, 'views', 1);
+  }
+  /**
+   * @desc 获取详情
+   */
+  async getDetail(id: number): Promise<any> {
+    try {
+      return await this.articleRepository.findOneOrFail(id);
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 }
