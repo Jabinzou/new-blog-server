@@ -35,12 +35,14 @@ export class ArticleService {
     }
     const [list = [], count = 0] = await getRepository(Article)
       .createQueryBuilder('article')
+      .leftJoin('article.user', 'u')
       .select([
         'article.id',
         'article.desc',
         'article.createAt',
         'article.title',
         'article.views',
+        'u.id',
       ])
       .leftJoinAndSelect('article.category', 'category')
       .leftJoinAndSelect('article.tag', 'tag')
