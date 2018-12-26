@@ -3,12 +3,13 @@ import {NestMiddleware, MiddlewareConsumer, Logger, MiddlewareFunction, Injectab
 export class LoggerMiddlerWare implements NestMiddleware {
   resolve(...arg: any[]): MiddlewareFunction {
     return (req, res, next) => {
-      Logger.log(JSON.stringify({
+      process.env.NODE_ENV === 'developement' && Logger.log(JSON.stringify({
         req: {
           url: req.url,
           methods: req.method,
           query: req.query,
           params: req.params,
+          body: req.body,
         },
       }));
       next();

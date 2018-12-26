@@ -68,7 +68,8 @@ export class ArticleService {
     const option = {
       stripIgnoreTagBody: ['script'], // 过滤script标签
     };
-    article.content = xss(options.content, option);
+    // article.content = xss(options.content, option);
+    article.content = options.content;
     article.title = options.title;
     article.desc = options.desc;
     article.user = user;
