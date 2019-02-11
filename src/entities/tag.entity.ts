@@ -7,6 +7,8 @@ import {
   ManyToMany,
   ManyToOne,
   JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -22,18 +24,16 @@ export class Tag {
   @ManyToOne(type => User, user => user.category)
   user: User;
 
-  @Column({
+  @CreateDateColumn({
+    nullable: false,
     name: 'createAt',
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
+    comment: '创建时间',
   })
-  createAt: Date;
-
-  @Column({
+  createAt: Date | string;
+  @UpdateDateColumn({
+    nullable: false,
     name: 'updateAt',
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
-    onUpdate: 'CURRENT_TIMESTAMP',
+    comment: '更新时间',
   })
-  updateAt: Date;
+  updateAt: Date | string;
 }

@@ -1,4 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinTable } from 'typeorm';
+import {
+  Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Article } from './article.entity';
 import { User } from './user.entity';
 
@@ -15,18 +19,16 @@ export class Category {
   @ManyToOne(type => User, user => user.category, {cascade: true, onDelete: 'CASCADE', primary: true})
   user: User;
 
-  @Column({
-    name: 'createdAt',
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
+  @CreateDateColumn({
+    nullable: false,
+    name: 'createAt',
+    comment: '创建时间',
   })
-  createdAt: Date;
-
-  @Column({
-    name: 'updatedAt',
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
-    onUpdate: 'CURRENT_TIMESTAMP',
+  createAt: Date | string;
+  @UpdateDateColumn({
+    nullable: false,
+    name: 'updateAt',
+    comment: '更新时间',
   })
-  updatedAt: Date;
+  updateAt: Date | string;
 }
