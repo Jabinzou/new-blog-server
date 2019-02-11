@@ -34,7 +34,7 @@ export class UserController {
     return this.userService.findId(id);
   }
   @Post('verify')
-  async confirm(@Body() options: UserDto, @Response() res): Promise<any> {
+  async confirm(@Body() options: UserDto, @Response() res, @Request() req): Promise<any> {
     try {
       const params = {
         userName: decryptString(options.userName, options.key, options.iv),
@@ -44,13 +44,14 @@ export class UserController {
       const token = jwt.sign(Object.assign({}, backup), 'kissmycutebaby', {
         expiresIn: '24h',
       });
+      const domain = req.headers.host.split(':')[0];
       /**
        * @description 这里需要解析cookie设置，上线需要替换domain,多个cookie用逗号隔开
        */
       res.set('Set-Cookie',
         [
-          `token=${token};Domain=localhost;Path=/;Max-Age=${24 * 60 * 60}`,
-          `tag=${backup.id};Domain=localhost;Path=/;Max-Age=${24 * 60 * 60}`,
+          `token=${token};Domain=${domain};Path=/;Max-Age=${24 * 60 * 60}`,
+          `tag=${backup.id};Domain=${domain};Path=/;Max-Age=${24 * 60 * 60}`,
         ],
       );
       res.send(token);
