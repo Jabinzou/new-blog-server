@@ -85,8 +85,8 @@ export class ArticleService {
    * @desc increment views
    * @param id
    */
-  async increment(id: number): Promise<any> {
-    return this.articleRepository.increment({id}, 'views', 1);
+  async increment(id: object): Promise<any> {
+    await this.articleRepository.increment(id, 'views', 1);
   }
   /**
    * @desc 获取详情

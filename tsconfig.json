@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
+    "resolveJsonModule": true,
     "noLib": false,
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
@@ -12,10 +14,15 @@
     "sourceMap": true,
     "allowJs": true,
     "outDir": "./dist",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@app": ["./"],
+      "@app/*": ["./*"]
+    }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "*.d.ts"
   ],
   "exclude": [
     "node_modules",
