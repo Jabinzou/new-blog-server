@@ -5,6 +5,7 @@
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
+    "lib": ["dom", "es2015", "es2016", "es2017"],
     "resolveJsonModule": true,
     "noLib": false,
     "allowSyntheticDefaultImports": true,

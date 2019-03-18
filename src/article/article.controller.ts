@@ -48,7 +48,7 @@ export class ArticleController {
   }
 
   @Post('up')
-  async increment(@Body() options: number): Promise<any> {
+  async increment(@Body() options: object): Promise<any> {
     try {
       return await this.articleService.increment(options);
     } catch (error) {
