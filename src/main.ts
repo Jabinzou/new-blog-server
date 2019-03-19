@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from 'app.module';
+import { AppModule } from './app.module';
 import { RequestIntercenptor } from './common/interceptor/request.interceptor';
 import { TimeoutInterceptor } from './common/interceptor/timeout.interceptor';
 import { Signverify } from './common/guard/auth.guard';

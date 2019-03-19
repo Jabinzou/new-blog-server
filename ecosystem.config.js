@@ -6,7 +6,9 @@ module.exports = {
   apps: [{
     name: 'blog_server',
     script: './dist/main.js',                      // 执行文件
-    cwd: './',                           
+    cwd: './',                                // 根目录
+    interpreter: 'node', // 解释器
+    interpreter_args: '-r ./tsconfig-paths-bootstrap.js', // 解释器参数
     min_uptime: 10000, // 启动10s以内挂掉的进程视为异常重启，超过默认最大重启次数15次之后即不再自动重启
     exec_mode: 'cluster',
     instances: process.env.INSTANCES || Math.floor(os.cpus().length * 0.75),
