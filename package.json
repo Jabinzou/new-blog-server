@@ -28,8 +28,8 @@
     "mysql": "^2.16.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.0.0",
-    "typeorm": "^0.2.7",
-    "typescript": "^2.6.2",
+    "typeorm": "^0.2.8",
+    "typescript": "^3.0.0",
     "xss": "^1.0.3"
   },
   "devDependencies": {
