@@ -1,6 +1,8 @@
 import {Body, Controller, Get, Param, Post, Query, ParseIntPipe, HttpException,
   HttpStatus,
-  Options} from '@nestjs/common';
+  UseInterceptors,
+  FileInterceptor,
+  UploadedFile} from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './article.dto';
 
@@ -54,5 +56,11 @@ export class ArticleController {
     } catch (error) {
       throw new HttpException({ error }, HttpStatus.BAD_REQUEST);
     }
+  }
+
+  @Post('img-upload')
+  @UseInterceptors(FileInterceptor('file')) // upload formData key: value中的key
+  async uploadFile(@UploadedFile() file) {
+    return await this.articleService.upload(file);
   }
 }

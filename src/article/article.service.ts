@@ -7,6 +7,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateArticleDto } from './article.dto';
 import * as xss from 'xss';
+import { qiniuUpload } from '@app/utils/upload';
+import { getFileExtensions } from '@app/utils/common';
+import { LooseObject } from '@app/interface/common';
+import { md5Sign } from '@app/utils/stringUtil';
+import * as stream from 'stream';
 @Injectable()
 export class ArticleService {
   constructor(
@@ -97,5 +102,22 @@ export class ArticleService {
     } catch (err) {
       throw new Error(err);
     }
+  }
+  async upload(file: LooseObject): Promise<any> {
+    const extensions = getFileExtensions(file.originalname);
+    const key = `img/${md5Sign(file.originalname)}.${extensions}`;
+    try {
+      await qiniuUpload('stream', this.bufferToStream(file.buffer), key);
+      return `${process.env.QINNIU_DOMAIN}/${key}`;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+  private bufferToStream(buffer) {
+    const Duplex = stream.Duplex;
+    const streamReader = new Duplex();
+    streamReader.push(buffer);
+    streamReader.push(null);
+    return streamReader;
   }
 }
