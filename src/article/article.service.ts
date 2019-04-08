@@ -110,7 +110,7 @@ export class ArticleService {
       await qiniuUpload('stream', this.bufferToStream(file.buffer), key);
       return `${process.env.QINNIU_DOMAIN}/${key}`;
     } catch (e) {
-      throw new Error(e);
+      throw new Error(JSON.stringify(e));
     }
   }
   private bufferToStream(buffer) {
